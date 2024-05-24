@@ -3,8 +3,6 @@ public class Disease extends Symptoms
     private int fit;
     private String diseaseName;
     private double temp;
-    private int age;
-    private int gender;//1 = male; 2 = female; 3 = equal
 
     public Disease(int fit,
                    int age,

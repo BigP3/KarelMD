@@ -1,7 +1,7 @@
 public class Symptoms
 {
     private int age;
-    private int gender;//1 = male; 2 = female; 3 = equal
+    private int gender;//1 = male; 2 = female; -1 = equal
     private boolean[] symptoms;
 
     public Symptoms(int age,
