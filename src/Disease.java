@@ -1,11 +1,10 @@
-public class Disease
+public class Disease extends Symptoms
 {
     private int fit;
     private String diseaseName;
     private double temp;
-    private boolean[] symptoms;
     private int age;
-    private boolean gender;//true = male; false = female
+    private int gender;//1 = male; 2 = female; 3 = equal
 
     public Disease(int fit,
                    String diseaseName, 
@@ -15,12 +14,12 @@ public class Disease
                    boolean runnyNose,
                    boolean chills,
                    int age,
-                   boolean gender)
+                   int gender)
     {
+        super(cough, soreThroat, runnyNose, chills);
         this.fit = fit;
         this.diseaseName = diseaseName;
         this.temp = temp;
-        this.symptoms = new boolean[] {cough, soreThroat, runnyNose, chills};
         this.age = age;
         this.gender = gender;
     }
@@ -40,17 +39,12 @@ public class Disease
         return temp;
     }
 
-    public boolean[] getSymptoms()
-    {
-        return symptoms;
-    }
-    
     public int getAge()
     {
         return age;
     }
 
-    public boolean isGender()
+    public int isGender()
     {
         return gender;
     }
