@@ -7,21 +7,19 @@ public class Disease extends Symptoms
     private int gender;//1 = male; 2 = female; 3 = equal
 
     public Disease(int fit,
+                   int age,
+                   int gender,
                    String diseaseName, 
                    double temp,
                    boolean cough,
                    boolean soreThroat,
                    boolean runnyNose,
-                   boolean chills,
-                   int age,
-                   int gender)
+                   boolean chills)
     {
-        super(cough, soreThroat, runnyNose, chills);
+        super(age, gender, cough, soreThroat, runnyNose, chills);
         this.fit = fit;
         this.diseaseName = diseaseName;
         this.temp = temp;
-        this.age = age;
-        this.gender = gender;
     }
 
     public int getFit()
@@ -37,15 +35,5 @@ public class Disease extends Symptoms
     public double getTemp()
     {
         return temp;
-    }
-
-    public int getAge()
-    {
-        return age;
-    }
-
-    public int isGender()
-    {
-        return gender;
     }
 }
