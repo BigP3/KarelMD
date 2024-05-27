@@ -7,12 +7,14 @@ public class Patient extends Symptoms
     //private int age;
     //private int gender;
     private ArrayList<Disease> d;
+    private double temp;
     //private boolean[] symptoms;
 
-    public Patient(String name, int age, int gender, boolean cough,
+    public Patient(String name, int age, int gender, boolean cough, double temp, 
                     boolean soreThroat, boolean runnyNose, boolean chills) {
         super(age, gender, cough, soreThroat, runnyNose, chills);
         this.name = name;
+        this.temp = temp;
         d = new ArrayList<Disease>();
     }
 
@@ -25,6 +27,12 @@ public class Patient extends Symptoms
     public void addDisease(Disease s) {
         d.add(s);
     }
-    
+    public void setTemp(double t) {
+        temp =t;
+
+    }
+    public double getTemp() {
+        return temp;
+    }
     
 }
