@@ -2,22 +2,25 @@ public class Disease extends Symptoms
 {
     private int fit;
     private String diseaseName;
-    private double temp;
+    private double minTemp;
+    private double maxTemp;
 
     public Disease(int fit,
                    int age,
                    int gender,
                    String diseaseName, 
-                   double temp,
+                   double minTemp,
+                   double maxTemp,
                    boolean cough,
                    boolean soreThroat,
                    boolean runnyNose,
                    boolean chills)
     {
         super(age, gender, cough, soreThroat, runnyNose, chills);
+        this.minTemp = minTemp;
+        this.maxTemp = maxTemp;
         this.fit = fit;
         this.diseaseName = diseaseName;
-        this.temp = temp;
     }
 
     public int getFit()
@@ -30,8 +33,13 @@ public class Disease extends Symptoms
         return diseaseName;
     }
     
-    public double getTemp()
+    public double getMinTemp()
     {
-        return temp;
+        return minTemp;
+    }
+
+    public double getMaxTemp()
+    {
+        return maxTemp;
     }
 }
