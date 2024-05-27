@@ -28,6 +28,11 @@ public class Disease extends Symptoms
         return fit;
     }
 
+    public void setFit(int fit)
+    {
+        this.fit = fit;
+    }
+
     public String getDiseaseName()
     {
         return diseaseName;
