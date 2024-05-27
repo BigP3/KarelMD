@@ -118,7 +118,7 @@ public class Main
                         System.out.println("You have been diagnosed with:");
                         for (Disease d : diagnosis)
                         {
-                            System.out.println(d.getDiseaseName());
+                            System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
                         }
                         System.out.println();
 
