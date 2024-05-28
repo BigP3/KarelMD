@@ -47,15 +47,13 @@ public class Main
         if (!wastingTime)
         {
             System.out.println("What is your age?");
-            age = sc.nextInt();
-            System.out.println();
+            age = tryAndCatchInt();
 
             System.out.println("What is your gender?");
             gender = testGender();
 
-            System.out.println("What is your body temperature?");
-            temp = sc.nextDouble();
-            System.out.println();
+            System.out.println("What is your body temperature in Celsius?");
+            temp = tryAndCatchDouble();
 
             System.out.println("Do you cough?");
             cough = booleanConverter();
@@ -216,6 +214,7 @@ public class Main
             answer.toLowerCase().equals("yessir") ||
             answer.toLowerCase().equals("indeed") ||
             answer.toLowerCase().equals("positive") ||
+            answer.toLowerCase().equals("sure") ||
             answer.toLowerCase().equals("sometimes"))
         {
             return true;
@@ -231,6 +230,7 @@ public class Main
                  answer.toLowerCase().equals("no sir") ||
                  answer.toLowerCase().equals("absolutely not") ||
                  answer.toLowerCase().equals("negative") ||
+                 answer.toLowerCase().equals("not sure") ||
                  answer.toLowerCase().equals("rarely"))
         {
             return false;
@@ -258,6 +258,7 @@ public class Main
             answer.toLowerCase().equals("ok") ||
             answer.toLowerCase().equals("excellent") ||
             answer.toLowerCase().equals("amazing") ||
+            answer.toLowerCase().equals("skibidi") ||
             answer.toLowerCase().equals("happy"))
         {
             return true;
@@ -265,6 +266,40 @@ public class Main
         else
         {
             return false;
+        }
+    }
+
+    public static int tryAndCatchInt()
+    {
+        Scanner sc = new Scanner(System.in);
+        int value = -1;
+        try
+        {
+            value = sc.nextInt();
+            System.out.println();
+            return value;
+        }
+        catch (Exception e)
+        {
+            System.out.println("\nFor syntactical purposes, please enter a whole number age:");
+            return tryAndCatchInt();
+        }
+    }
+
+    public static double tryAndCatchDouble()
+    {
+        Scanner sc = new Scanner(System.in);
+        double value = -1;
+        try
+        {
+            value = sc.nextDouble();
+            System.out.println();
+            return value;
+        }
+        catch (Exception e)
+        {
+            System.out.println("\nFor syntactical purposes, please enter a whole/decimal number in Celsius:");
+            return tryAndCatchDouble();
         }
     }
 }
