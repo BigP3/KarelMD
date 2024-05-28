@@ -1,4 +1,3 @@
-import java.util.*;
 public class DiagnosisEngine
 {
     private Disease[] diseaseDatabase;
@@ -18,9 +17,8 @@ public class DiagnosisEngine
         return bestFit;
     }
 
-    public ArrayList<Disease> differentialDiagnosis(){
-        
-        ArrayList<Disease> ret = new ArrayList<>();
+    public void differentialDiagnosis(){
+
         for (Disease disease : diseaseDatabase){
             // compare ages
             if (pat.getAge() == disease.getAge() || disease.getAge() == -1){
@@ -45,9 +43,8 @@ public class DiagnosisEngine
         }
         for (Disease disease : diseaseDatabase){
             if (disease.getFit() >= bestFit-1 && disease.getFit() > 0){
-                ret.add(disease);
+                Patient.addDisease(disease);
             }
         }
-        return ret;
     }
 }
