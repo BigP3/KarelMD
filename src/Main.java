@@ -106,7 +106,8 @@ public class Main
                     public void run()
                     {
                         DiagnosisEngine results = new DiagnosisEngine(pat);
-                        ArrayList<Disease> diagnosis = results.differentialDiagnosis();
+                        results.differentialDiagnosis();
+                        ArrayList<Disease> diagnosis = Patient.getDisease();
                         ArrayList<Disease> plausibleDiagnosis = new ArrayList<Disease>();
 
                         for (int i = 0; i < diagnosis.size(); i++)

@@ -6,7 +6,7 @@ public class Patient extends Symptoms
     private String name;
     //private int age;
     //private int gender;
-    private ArrayList<Disease> d;
+    private static ArrayList<Disease> d;
     private double temp;
     //private boolean[] symptoms;
 
@@ -24,9 +24,14 @@ public class Patient extends Symptoms
     public void setName(String n) {
         name = n;
     }
-    public void addDisease(Disease s) {
+    public static void addDisease(Disease s) {
         d.add(s);
     }
+
+    public static ArrayList<Disease> getDisease() {
+        return d;
+    }
+
     public void setTemp(double t) {
         temp =t;
 
