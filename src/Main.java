@@ -16,7 +16,8 @@ public class Main
         boolean runnyNose;
         boolean chills;
         boolean goodOrBad;
-        
+        boolean wastingTime = false;
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello, I am Karel M.D. What is your name?");
         name = sc.nextLine();
@@ -29,7 +30,8 @@ public class Main
             System.out.println("That's wonderful. Would you still like to take the diagnosis?");
             if (!booleanConverter())
             {
-                System.out.println("I see. So, you're either a hypochondriac or a masochist who enjoys wasting my time. Goodbye.");
+                System.out.println("I see. So, you're either a hypochondriac or a masochist who enjoys wasting my time. Goodbye.\n");
+                wastingTime = true;
             }
             else
             {
@@ -41,116 +43,119 @@ public class Main
             System.out.println("You're feeling bad? Congratulations, you've just described 99% of my patients. Now, let's figure out what makes you special.");   
         }
 
-        System.out.println("What is your age?");
-        age = sc.nextInt();
-        System.out.println();
-        System.out.println("What is your gender?");
-        gender = testGender();
-        System.out.println("Do you cough?");
-        cough = booleanConverter();
-        System.out.println("What is your body temperature?");
-        temp = sc.nextDouble();
-        System.out.println();
-        System.out.println("Do you have a sore throat?");
-        soreThroat = booleanConverter();
-        System.out.println("Do you have a runny nose?");
-        runnyNose = booleanConverter();
-        System.out.println("Do you have body chills?");
-        chills = booleanConverter();
-        System.out.println();
-        System.out.println("Well, I think I've reached my quota for stupid questions today. Time to put my genius brain to work and solve this puzzle.\n");
-        pat = new Patient(name, age, gender, cough, temp, soreThroat, runnyNose, chills);
-
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask()
+        if (!wastingTime)
         {
-            public void run()
-            {
-                System.out.println("Thinking...\n");
-                thinkingCount++;
-            }
-        };
-        timer.scheduleAtFixedRate(task, 2000, 2000);
+            System.out.println("What is your age?");
+            age = sc.nextInt();
+            System.out.println();
+            System.out.println("What is your gender?");
+            gender = testGender();
+            System.out.println("Do you cough?");
+            cough = booleanConverter();
+            System.out.println("What is your body temperature?");
+            temp = sc.nextDouble();
+            System.out.println();
+            System.out.println("Do you have a sore throat?");
+            soreThroat = booleanConverter();
+            System.out.println("Do you have a runny nose?");
+            runnyNose = booleanConverter();
+            System.out.println("Do you have body chills?");
+            chills = booleanConverter();
+            System.out.println();
+            System.out.println("Well, I think I've reached my quota for stupid questions today. Time to put my genius brain to work and solve this puzzle.\n");
+            pat = new Patient(name, age, gender, cough, temp, soreThroat, runnyNose, chills);
 
-        while (thinkingCount < 3)
-        {
-            Thread.sleep(100);
-        }
-
-        if (thinkingCount == 3)
-        {
-            timer.cancel();
-
-            Timer timer2 = new Timer();
-            TimerTask task2 = new TimerTask()
+            Timer timer = new Timer();
+            TimerTask task = new TimerTask()
             {
                 public void run()
                 {
-                    System.out.println("\n\n\nHere you go, " + pat.getName() + ". Here are the results:\n");
+                    System.out.println("Thinking...\n");
+                    thinkingCount++;
                 }
             };
+            timer.scheduleAtFixedRate(task, 2000, 2000);
 
-            TimerTask task3 = new TimerTask()
+            while (thinkingCount < 3)
             {
-                public void run()
+                Thread.sleep(100);
+            }
+
+            if (thinkingCount == 3)
+            {
+                timer.cancel();
+
+                Timer timer2 = new Timer();
+                TimerTask task2 = new TimerTask()
                 {
-                    DiagnosisEngine results = new DiagnosisEngine(pat);
-                    ArrayList<Disease> diagnosis = results.differentialDiagnosis();
-                    ArrayList<Disease> plausibleDiagnosis = new ArrayList<Disease>();
-
-                    for (int i = 0; i < diagnosis.size(); i++)
+                    public void run()
                     {
-                        if (diagnosis.get(i).getFit() <= 3)
-                        {
-                            diagnosis.remove(i);
-                            i--;
-                        }
-                        else if (diagnosis.get(i).getFit() > 3 && diagnosis.get(i).getFit() == results.getBestFit() - 1)
-                        {
-                            plausibleDiagnosis.add(diagnosis.get(i));
-                            diagnosis.remove(i);
-                            i--;
-                        }
+                        System.out.println("\n\n\nHere you go, " + pat.getName() + ". Here are the results:\n");
                     }
+                };
 
-                    if (diagnosis.size() > 0)
+                TimerTask task3 = new TimerTask()
+                {
+                    public void run()
                     {
-                        System.out.println("You have been diagnosed with:");
-                        for (Disease d : diagnosis)
-                        {
-                            System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
-                        }
-                        System.out.println();
+                        DiagnosisEngine results = new DiagnosisEngine(pat);
+                        ArrayList<Disease> diagnosis = results.differentialDiagnosis();
+                        ArrayList<Disease> plausibleDiagnosis = new ArrayList<Disease>();
 
-                        if (plausibleDiagnosis.size() > 0)
+                        for (int i = 0; i < diagnosis.size(); i++)
                         {
-                            System.out.println("You might also have:");
-                            for (Disease d : plausibleDiagnosis)
+                            if (diagnosis.get(i).getFit() <= 3)
+                            {
+                                diagnosis.remove(i);
+                                i--;
+                            }
+                            else if (diagnosis.get(i).getFit() > 3 && diagnosis.get(i).getFit() == results.getBestFit() - 1)
+                            {
+                                plausibleDiagnosis.add(diagnosis.get(i));
+                                diagnosis.remove(i);
+                                i--;
+                            }
+                        }
+
+                        if (diagnosis.size() > 0)
+                        {
+                            System.out.println("You have been diagnosed with:");
+                            for (Disease d : diagnosis)
                             {
                                 System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
                             }
                             System.out.println();
+
+                            if (plausibleDiagnosis.size() > 0)
+                            {
+                                System.out.println("You might also have:");
+                                for (Disease d : plausibleDiagnosis)
+                                {
+                                    System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
+                                }
+                                System.out.println();
+                            }
+
+                            System.out.println("I hate to admit it, but there's a slim chance I could be wrong. I know, shocking. You better go find a real doctor to confirm it, just in case.\nBye bye.\n");
                         }
-
-                        System.out.println("I hate to admit it, but there's a slim chance I could be wrong. I know, shocking. You better go find a real doctor to confirm it, just in case.\nBye bye.\n");
+                        else
+                        {
+                            System.out.println("I've got no clue what's wrong with you. I guess you're just a medical mystery. Enjoy your new title.\n(If you're still concerned, go find a real doctor, just in case.)\nBye bye.\n");
+                        }
                     }
-                    else
-                    {
-                        System.out.println("I've got no clue what's wrong with you. I guess you're just a medical mystery. Enjoy your new title.\n(If you're still concerned, go find a real doctor, just in case.)\nBye bye.\n");
-                    }
-                }
-            };
-            timer2.schedule(task2, 2000);
-            timer2.schedule(task3, 4000);
+                };
+                timer2.schedule(task2, 2000);
+                timer2.schedule(task3, 4000);
 
-            TimerTask task4 = new TimerTask()
-            {
-                public void run()
+                TimerTask task4 = new TimerTask()
                 {
-                    timer2.cancel();
-                }
-            };
-            timer2.schedule(task4, 4001);
+                    public void run()
+                    {
+                        timer2.cancel();
+                    }
+                };
+                timer2.schedule(task4, 4001);
+            }
         }
     }
 
