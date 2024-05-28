@@ -2,11 +2,13 @@ import java.util.*;
 
 public class Main
 {
-    private static int thinkingCount = 0;
+    private static int thinkingCount;
+    private static boolean doneThinking;
     private static Patient pat;
 
     public static void main(String[] args) throws Exception
     {
+        Scanner sc = new Scanner(System.in);
         String name;
         int age;
         int gender;
@@ -18,7 +20,6 @@ public class Main
         boolean goodOrBad;
         boolean wastingTime = false;
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Hello, I am Karel M.D. What is your name?");
         name = sc.nextLine();
         System.out.println();
@@ -48,24 +49,32 @@ public class Main
             System.out.println("What is your age?");
             age = sc.nextInt();
             System.out.println();
+
             System.out.println("What is your gender?");
             gender = testGender();
-            System.out.println("Do you cough?");
-            cough = booleanConverter();
+
             System.out.println("What is your body temperature?");
             temp = sc.nextDouble();
             System.out.println();
+
+            System.out.println("Do you cough?");
+            cough = booleanConverter();
+
             System.out.println("Do you have a sore throat?");
             soreThroat = booleanConverter();
+
             System.out.println("Do you have a runny nose?");
             runnyNose = booleanConverter();
+
             System.out.println("Do you have body chills?");
             chills = booleanConverter();
-            System.out.println();
+
             System.out.println("Well, I think I've reached my quota for stupid questions today. Time to put my genius brain to work and solve this puzzle.\n");
             pat = new Patient(name, age, gender, cough, temp, soreThroat, runnyNose, chills);
 
             Timer timer = new Timer();
+            thinkingCount = 0;
+            doneThinking = false;
             TimerTask task = new TimerTask()
             {
                 public void run()
@@ -142,19 +151,22 @@ public class Main
                         {
                             System.out.println("I've got no clue what's wrong with you. I guess you're just a medical mystery. Enjoy your new title.\n(If you're still concerned, go find a real doctor, just in case.)\nBye bye.\n");
                         }
+
+                        doneThinking = true;
                     }
                 };
                 timer2.schedule(task2, 2000);
                 timer2.schedule(task3, 4000);
 
-                TimerTask task4 = new TimerTask()
+                while (!doneThinking)
                 {
-                    public void run()
-                    {
-                        timer2.cancel();
-                    }
-                };
-                timer2.schedule(task4, 4001);
+                    Thread.sleep(100);
+                }
+
+                if (doneThinking)
+                {
+                    timer2.cancel();
+                }
             }
         }
     }
