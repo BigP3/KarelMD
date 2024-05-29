@@ -9,11 +9,18 @@ public class Symptoms
                     boolean cough,
                     boolean soreThroat,
                     boolean runnyNose,
-                    boolean chills)
+                    boolean chills,
+                    boolean lossOfTaste,
+                    boolean headache,
+                    boolean bodyAche,
+                    boolean stomacheAche,
+                    boolean skinRashes,
+                    boolean jointPain,
+                    boolean visionProblem)
     {
         this.age = age;
         this.gender = gender;
-        this.symptoms = new boolean[] {cough, soreThroat, runnyNose, chills};
+        this.symptoms = new boolean[] {cough, soreThroat, runnyNose, chills, lossOfTaste, headache, bodyAche, stomacheAche, skinRashes, jointPain, visionProblem};
     }
 
     public int getAge()
