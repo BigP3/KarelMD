@@ -18,12 +18,12 @@ public class Disease extends Symptoms
                    boolean lossOfTaste,
                    boolean headache,
                    boolean bodyAche,
-                   boolean stomacheAche,
+                   boolean stomachache,
                    boolean skinRashes,
                    boolean jointPain,
                    boolean visionProblem)
     {
-        super(age, gender, cough, soreThroat, runnyNose, chills, lossOfTaste, headache, bodyAche, stomacheAche, skinRashes, jointPain, visionProblem);
+        super(age, gender, cough, soreThroat, runnyNose, chills, lossOfTaste, headache, bodyAche, stomachache, skinRashes, jointPain, visionProblem);
         this.minTemp = minTemp;
         this.maxTemp = maxTemp;
         this.fit = fit;

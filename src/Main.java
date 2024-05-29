@@ -17,6 +17,13 @@ public class Main
         boolean soreThroat;
         boolean runnyNose;
         boolean chills;
+        boolean lossOfTaste;
+        boolean headache;
+        boolean bodyAche;
+        boolean stomachache;
+        boolean skinRashes;
+        boolean jointPain;
+        boolean visionProblem;
         boolean goodOrBad;
         boolean wastingTime = false;
 
@@ -67,8 +74,29 @@ public class Main
             System.out.println("Do you have body chills?");
             chills = booleanConverter();
 
+            System.out.println("Do you have any loss of taste or smell?");
+            lossOfTaste = booleanConverter();
+
+            System.out.println("Do you have headaches?");
+            headache = booleanConverter();
+
+            System.out.println("Do you have body aches?");
+            bodyAche = booleanConverter();
+
+            System.out.println("Do you have stomachaches?");
+            stomachache = booleanConverter();
+
+            System.out.println("Do you have skin rashes?");
+            skinRashes = booleanConverter();
+
+            System.out.println("Do you have joint pain?");
+            jointPain = booleanConverter();
+
+            System.out.println("Do you have vision problems?");
+            visionProblem = booleanConverter();
+
             System.out.println("Well, I think I've reached my quota for stupid questions today. Time to put my genius brain to work and solve this puzzle.\n");
-            pat = new Patient(name, age, gender, cough, temp, soreThroat, runnyNose, chills);
+            pat = new Patient(name, age, gender, cough, temp, soreThroat, runnyNose, chills, lossOfTaste, headache, bodyAche, stomachache, skinRashes, jointPain, visionProblem);
 
             Timer timer = new Timer();
             thinkingCount = 0;

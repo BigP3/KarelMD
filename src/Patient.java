@@ -11,8 +11,12 @@ public class Patient extends Symptoms
     //private boolean[] symptoms;
 
     public Patient(String name, int age, int gender, boolean cough, double temp, 
-                    boolean soreThroat, boolean runnyNose, boolean chills) {
-        super(age, gender, cough, soreThroat, runnyNose, chills);
+                   boolean soreThroat, boolean runnyNose, boolean chills, boolean lossOfTaste, 
+                   boolean headache, boolean bodyAche, boolean stomacheAche, 
+                   boolean skinRashes, boolean jointPain, boolean visionProblem) {
+        super(age, gender, cough, soreThroat, runnyNose, chills,
+              lossOfTaste, headache, bodyAche, stomacheAche, 
+              skinRashes, jointPain, visionProblem);
         this.name = name;
         this.temp = temp;
         d = new ArrayList<Disease>();
