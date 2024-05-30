@@ -10,7 +10,8 @@ public class Main
     {
         Scanner sc = new Scanner(System.in);
         String name;
-        int age;
+        int ageValue;
+        int age = -1;
         int gender;
         boolean cough;
         double temp;
@@ -54,7 +55,27 @@ public class Main
         if (!wastingTime)
         {
             System.out.println("What is your age?");
-            age = tryAndCatchInt();
+            ageValue = tryAndCatchWholeNumberInt();
+            if (0 <= ageValue && ageValue <= 5)
+            {
+                age = 1;
+            }
+            else if (6 <= ageValue && ageValue <= 26)
+            {
+                age = 2;
+            }
+            else if (27 <= ageValue && ageValue <= 39)
+            {
+                age = 3;
+            }
+            else if (40 <= ageValue && ageValue <= 59)
+            {
+                age = 4;
+            }
+            else if (60 <= ageValue)
+            {
+                age = 5;
+            }
 
             System.out.println("What is your gender?");
             gender = testGender();
@@ -227,75 +248,49 @@ public class Main
 
     public static boolean booleanConverter()
     {
+        String[] yesVariation = {"yes", "affirmative", "y", "true", "yep", "yeah", "yea", "definetely", "hell yeah", "yessir", "indeed", "positive", "sure", "sometimes", "maybe", "probably"};
+        String[] noVariation = {"no", "untrue", "n", "false", "nope", "nah", "not at all", "hell nah", "no sir", "absolutely not", "negative", "not sure", "rarely", "nah sir", "hell no"};
+    
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
         System.out.println();
 
-        if (answer.toLowerCase().equals("yes") ||
-            answer.toLowerCase().equals("affirmative") ||
-            answer.toLowerCase().equals("y") ||
-            answer.toLowerCase().equals("true") ||
-            answer.toLowerCase().equals("yep") ||
-            answer.toLowerCase().equals("yeah") ||
-            answer.toLowerCase().equals("yea") ||
-            answer.toLowerCase().equals("definetely") ||
-            answer.toLowerCase().equals("hell yeah") ||
-            answer.toLowerCase().equals("yessir") ||
-            answer.toLowerCase().equals("indeed") ||
-            answer.toLowerCase().equals("positive") ||
-            answer.toLowerCase().equals("sure") ||
-            answer.toLowerCase().equals("sometimes"))
+        for (String yes : yesVariation)
         {
-            return true;
+            if (answer.toLowerCase().equals(yes))
+            {
+                return true;
+            }
         }
-        else if (answer.toLowerCase().equals("no") ||
-                 answer.toLowerCase().equals("untrue") ||
-                 answer.toLowerCase().equals("n") ||
-                 answer.toLowerCase().equals("false") ||
-                 answer.toLowerCase().equals("nope") ||
-                 answer.toLowerCase().equals("nah") ||
-                 answer.toLowerCase().equals("not at all") ||
-                 answer.toLowerCase().equals("hell nah") ||
-                 answer.toLowerCase().equals("no sir") ||
-                 answer.toLowerCase().equals("absolutely not") ||
-                 answer.toLowerCase().equals("negative") ||
-                 answer.toLowerCase().equals("not sure") ||
-                 answer.toLowerCase().equals("rarely"))
+        for (String no : noVariation)
         {
-            return false;
+            if (answer.toLowerCase().equals((no)))
+            {
+                return false;
+            }
         }
-        else
-        {
-            System.out.println("For syntactical purposes, please enter a valid affirmative response:");
-            return booleanConverter();
-        }
+
+        System.out.println("For syntactical purposes, please enter a valid affirmative response:");
+        return booleanConverter();
     }
 
     public static boolean goodOrBad()
     {
+        String[] goodVariation = {"well", "good", "awsome", "wonderful", "great", "terrific", "okay", "ok", "excellent", "amazing", "skibidi", "happy"};
+        
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
         System.out.println();
 
-        if (answer.toLowerCase().equals("well") ||
-            answer.toLowerCase().equals("good") ||
-            answer.toLowerCase().equals("awsome") ||
-            answer.toLowerCase().equals("wonderful") ||
-            answer.toLowerCase().equals("great") ||
-            answer.toLowerCase().equals("terrific") ||
-            answer.toLowerCase().equals("okay") ||
-            answer.toLowerCase().equals("ok") ||
-            answer.toLowerCase().equals("excellent") ||
-            answer.toLowerCase().equals("amazing") ||
-            answer.toLowerCase().equals("skibidi") ||
-            answer.toLowerCase().equals("happy"))
+        for (String good : goodVariation)
         {
-            return true;
+            if (answer.toLowerCase().equals(good))
+            {
+                return true;
+            }
         }
-        else
-        {
-            return false;
-        }
+
+        return false;
     }
 
     public static int tryAndCatchInt()
@@ -312,6 +307,28 @@ public class Main
         {
             System.out.println("\nFor syntactical purposes, please enter a whole number age:");
             return tryAndCatchInt();
+        }
+    }
+
+    public static int tryAndCatchWholeNumberInt()
+    {
+        Scanner sc = new Scanner(System.in);
+        int value = -1;
+        try
+        {
+            value = sc.nextInt();
+            System.out.println();
+            if (value < 0)
+            {
+                System.out.println("Please enter a positive whole number age:");
+                return tryAndCatchWholeNumberInt();
+            }
+            return value;
+        }
+        catch (Exception e)
+        {
+            System.out.println("\nFor syntactical purposes, please enter a whole number age:");
+            return tryAndCatchWholeNumberInt();
         }
     }
 

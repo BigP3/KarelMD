@@ -13,7 +13,7 @@ public class DiagnosisEngine
         Disease bronchitis = new Disease(0, -1, -1, "Bronchitis", 35.0, 38.0, true, true, false, false, false, false, true, false, false, false, false);
         Disease strepThroat= new Disease(0, 2, -1, "Strep Throat", 38.3, 44.0, false, true, false, true, false, true, true, true, false, false, false);
         this.pat = pat;
-        diseaseDatabase = new Disease[2];
+        diseaseDatabase = new Disease[7];
         diseaseDatabase[0] = flu;
         diseaseDatabase[1] = cold;
         diseaseDatabase[2] = covid19;
