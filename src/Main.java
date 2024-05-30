@@ -192,12 +192,7 @@ public class Main
 
                         for (int i = 0; i < diagnosis.size(); i++)
                         {
-                            if (diagnosis.get(i).getFit() <= 0)
-                            {
-                                diagnosis.remove(i);
-                                i--;
-                            }
-                            else if (diagnosis.get(i).getFit() > 3 && diagnosis.get(i).getFit() == results.getBestFit() - 1)
+                            if (diagnosis.get(i).getFit() < results.getBestFit())
                             {
                                 plausibleDiagnosis.add(diagnosis.get(i));
                                 diagnosis.remove(i);

@@ -61,7 +61,7 @@ public class DiagnosisEngine
             }
         }
         for (Disease disease : diseaseDatabase){
-            if (disease.getFit() >= bestFit-1 && disease.getFit() > 0){
+            if (disease.getFit() > 0 && bestFit > 0){
                 Patient.addDisease(disease);
             }
         }
