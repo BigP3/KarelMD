@@ -45,6 +45,11 @@ public class Disease extends Symptoms
         this.fit++;
     }
 
+    public void fitMinusMinus()
+    {
+        this.fit--;
+    }
+
     public String getDiseaseName()
     {
         return diseaseName;

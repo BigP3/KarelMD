@@ -4,6 +4,7 @@ public class Main
 {
     private static int thinkingCount;
     private static boolean doneThinking;
+    private static boolean developerMode;
     private static Patient pat;
 
     public static void main(String[] args) throws Exception
@@ -27,10 +28,23 @@ public class Main
         boolean visionProblem;
         boolean goodOrBad;
         boolean wastingTime = false;
+        developerMode = false;
 
         System.out.println("Hello, I am Karel M.D. What is your name?");
         name = sc.nextLine();
         System.out.println();
+        if (name.equals("developerMode = true"))
+        {
+            developerMode = true;
+            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
+            name = sc.nextLine();
+            System.out.println();
+        }
+        else if (name.toLowerCase().equals("skibidi"))
+        {
+            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+            System.exit(10);
+        }
 
         System.out.println("How are you feeling today, " + name + "?");
         goodOrBad = goodOrBad();
@@ -54,6 +68,10 @@ public class Main
 
         if (!wastingTime)
         {
+            while (doneThinking = false)
+            {
+
+            }
             System.out.println("What is your age?");
             ageValue = tryAndCatchWholeNumberInt();
             if (0 <= ageValue && ageValue <= 5)
@@ -156,12 +174,25 @@ public class Main
                     {
                         DiagnosisEngine results = new DiagnosisEngine(pat);
                         results.differentialDiagnosis();
+
+                        //Developer mode
+                        if (developerMode)
+                        {
+                            System.out.println ("- This segment is for developer mode -");
+                            for (Disease d : results.getDiseaseDatabase())
+                            {
+                                System.out.println(d.getDiseaseName() + ", " + d.getFit());
+                            }
+                            System.out.println("- End of developer mode -\n");
+                        }
+                        //End of developer mode
+
                         ArrayList<Disease> diagnosis = Patient.getDisease();
                         ArrayList<Disease> plausibleDiagnosis = new ArrayList<Disease>();
 
                         for (int i = 0; i < diagnosis.size(); i++)
                         {
-                            if (diagnosis.get(i).getFit() <= 3)
+                            if (diagnosis.get(i).getFit() <= 0)
                             {
                                 diagnosis.remove(i);
                                 i--;
@@ -179,7 +210,14 @@ public class Main
                             System.out.println("You have been diagnosed with:");
                             for (Disease d : diagnosis)
                             {
-                                System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
+                                if (developerMode)
+                                {
+                                    System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
+                                }
+                                else
+                                {
+                                    System.out.println(d.getDiseaseName());
+                                }
                             }
                             System.out.println();
 
@@ -188,7 +226,14 @@ public class Main
                                 System.out.println("You might also have:");
                                 for (Disease d : plausibleDiagnosis)
                                 {
-                                    System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
+                                    if (developerMode)
+                                    {
+                                        System.out.println(d.getDiseaseName() + ", Fit Value: " + d.getFit());
+                                    }
+                                    else
+                                    {
+                                        System.out.println(d.getDiseaseName());
+                                    }
                                 }
                                 System.out.println();
                             }
@@ -239,6 +284,18 @@ public class Main
         {
             return 2;
         }
+        else if (genderName.toLowerCase().equals("skibidi"))
+        {
+            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+            System.exit(10);
+            return Integer.MAX_VALUE;
+        }
+        else if (genderName.equals("developerMode = true"))
+        {
+            developerMode = true;
+            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
+            return testGender();
+        }
         else
         {
             System.out.println("For purely medical purposes, please enter your biological gender/sex:");
@@ -270,13 +327,25 @@ public class Main
             }
         }
 
+        if (answer.toLowerCase().equals("skibidi"))
+        {
+            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+            System.exit(10);
+        }
+        else if (answer.equals("developerMode = true"))
+        {
+            developerMode = true;
+            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
+            return booleanConverter();
+        }
+
         System.out.println("For syntactical purposes, please enter a valid affirmative response:");
         return booleanConverter();
     }
 
     public static boolean goodOrBad()
     {
-        String[] goodVariation = {"well", "good", "awsome", "wonderful", "great", "terrific", "okay", "ok", "excellent", "amazing", "skibidi", "happy"};
+        String[] goodVariation = {"well", "good", "awsome", "wonderful", "great", "terrific", "okay", "ok", "excellent", "amazing", "happy"};
         
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
@@ -288,6 +357,18 @@ public class Main
             {
                 return true;
             }
+        }
+
+        if (answer.toLowerCase().equals("skibidi"))
+        {
+            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+            System.exit(10);
+        }
+        else if (answer.equals("developerMode = true"))
+        {
+            developerMode = true;
+            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
+            return goodOrBad();
         }
 
         return false;

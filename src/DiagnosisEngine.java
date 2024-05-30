@@ -24,6 +24,11 @@ public class DiagnosisEngine
         bestFit = 0;
     }
     
+    public Disease[] getDiseaseDatabase()
+    {
+        return diseaseDatabase;
+    }
+
     public int getBestFit(){
         return bestFit;
     }
@@ -44,8 +49,11 @@ public class DiagnosisEngine
                 disease.fitPlusPlus();
             }
             for (int i = 0; i < disease.getSymptoms().length; i++){
-                if (pat.getSymptoms()[i] == disease.getSymptoms()[i]) {
+                if (pat.getSymptoms()[i] && (pat.getSymptoms()[i] == disease.getSymptoms()[i])) {
                     disease.fitPlusPlus();
+                }
+                else if (pat.getSymptoms()[i] != disease.getSymptoms()[i]){
+                    disease.fitMinusMinus();
                 }
             }
             if (disease.getFit() > bestFit){
