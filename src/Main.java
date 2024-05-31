@@ -1,4 +1,5 @@
 import java.util.*;
+import javax.lang.model.util.ElementScanner14;
 
 public class Main
 {
@@ -261,25 +262,29 @@ public class Main
 
     public static int testGender()
     {
+        String[] maleVariation = {"male", "man", "men", "boy"};
+        String[] femaleVariation = {"female", "woman", "women", "girl"};
+        
         Scanner sc = new Scanner(System.in);
         String genderName = sc.nextLine();
         System.out.println();
 
-        if (genderName.toLowerCase().equals("male") ||
-            genderName.toLowerCase().equals("man") ||
-            genderName.toLowerCase().equals("men") ||
-            genderName.toLowerCase().equals("boy"))
+        for (String male : maleVariation)
         {
-            return 1;
+            if (doesItContain(genderName.toLowerCase(), male))
+            {
+                return 1;
+            }
         }
-        else if (genderName.toLowerCase().equals("female") ||
-                 genderName.toLowerCase().equals("woman") ||
-                 genderName.toLowerCase().equals("women") ||
-                 genderName.toLowerCase().equals("girl"))
+        for (String female : femaleVariation)
         {
-            return 2;
+            if (doesItContain(genderName.toLowerCase(), female))
+            {
+                return 2;
+            }
         }
-        else if (genderName.toLowerCase().equals("skibidi"))
+
+        if (doesItContain(genderName.toLowerCase(), "skibidi"))
         {
             System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
             System.exit(10);
@@ -309,20 +314,20 @@ public class Main
 
         for (String yes : yesVariation)
         {
-            if (answer.toLowerCase().equals(yes))
+            if (doesItContain(answer.toLowerCase(), yes))
             {
                 return true;
             }
         }
         for (String no : noVariation)
         {
-            if (answer.toLowerCase().equals((no)))
+            if (doesItContain(answer.toLowerCase(), no))
             {
                 return false;
             }
         }
 
-        if (answer.toLowerCase().equals("skibidi"))
+        if (doesItContain(answer.toLowerCase(), "skibidi"))
         {
             System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
             System.exit(10);
@@ -348,13 +353,13 @@ public class Main
 
         for (String good : goodVariation)
         {
-            if (answer.toLowerCase().equals(good))
+            if (doesItContain(answer.toLowerCase(), good))
             {
                 return true;
             }
         }
 
-        if (answer.toLowerCase().equals("skibidi"))
+        if (doesItContain(answer.toLowerCase(), "skibidi"))
         {
             System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
             System.exit(10);
@@ -422,6 +427,65 @@ public class Main
         {
             System.out.println("\nFor syntactical purposes, please enter a whole/decimal number in Celsius:");
             return tryAndCatchDouble();
+        }
+    }
+
+    public static boolean doesItContain(String inputString, String findString)
+    {
+        String input = inputString.toLowerCase();
+        String find = findString.toLowerCase();
+        int position = input.indexOf(find);
+        
+        if (position == -1)
+        {
+            return false;
+        }
+        else if (position == 0)
+        {
+            if (position + find.length() <= input.length() - 1)
+            {
+                String after = input.substring(position + find.length());
+                if ((after.compareTo("a") > 0 && after.compareTo("z") < 0))
+                {
+                    return doesItContain(input.substring(position + find.length()), find);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (position + find.length() <= input.length() - 1)
+            {
+                String before = input.substring(position - 1, position);
+                String after = input.substring(position + find.length());
+                if ((before.compareTo("a") > 0 && before.compareTo("z") < 0) || (after.compareTo("a") > 0 && after.compareTo("z") < 0))
+                {
+                    return doesItContain(input.substring(0, position) + input.substring(position + find.length()), find);
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                String before = input.substring(position - 1, position);
+                if ((before.compareTo("a") > 0 && before.compareTo("z") < 0))
+                {
+                    return doesItContain(input.substring(0, position), find);
+                }
+                else
+                {
+                    return true;
+                }
+            }
         }
     }
 }
