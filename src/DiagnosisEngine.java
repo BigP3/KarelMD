@@ -2,7 +2,7 @@ public class DiagnosisEngine
 {
     private Disease[] diseaseDatabase;
     private Patient pat;
-    private int bestFit;
+    private double bestFit;
    
     public DiagnosisEngine(Patient pat){
         Disease flu = new Disease(0, -1, -1, "Influenza", 38.0, 44.0, true, true, true, true, false, true, true, true, false, true, false);
@@ -29,7 +29,7 @@ public class DiagnosisEngine
         return diseaseDatabase;
     }
 
-    public int getBestFit(){
+    public double getBestFit(){
         return bestFit;
     }
 

@@ -1,11 +1,11 @@
 public class Disease extends Symptoms
 {
-    private int fit;
+    private double fit;
     private String diseaseName;
     private double minTemp;
     private double maxTemp;
 
-    public Disease(int fit,
+    public Disease(double fit,
                    int age,
                    int gender,
                    String diseaseName, 
@@ -30,7 +30,7 @@ public class Disease extends Symptoms
         this.diseaseName = diseaseName;
     }
 
-    public int getFit()
+    public double getFit()
     {
         return fit;
     }

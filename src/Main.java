@@ -1,5 +1,6 @@
+//Jay's class
+
 import java.util.*;
-import javax.lang.model.util.ElementScanner14;
 
 public class Main
 {
@@ -31,8 +32,13 @@ public class Main
         boolean wastingTime = false;
         developerMode = false;
 
+        String[] brainrotTerminology = {"skibidi", "looksmaxxing", "edging", "looksmax", "looksmaxing", "grimace shake", "fanum tax", "galvanized square steel", "galvanised square steel", "rizz", "gyatt", "ohio", "sigma"};
         System.out.println("Hello, I am Karel M.D. What is your name?");
         name = sc.nextLine();
+        if (doesItContain(name, "my name is"))
+        {
+            name = name.substring(11);
+        }
         System.out.println();
         if (name.equals("developerMode = true"))
         {
@@ -41,10 +47,13 @@ public class Main
             name = sc.nextLine();
             System.out.println();
         }
-        else if (name.toLowerCase().equals("skibidi"))
+        for (String brainrot : brainrotTerminology)
         {
-            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
-            System.exit(10);
+            if (doesItContain(name.toLowerCase(), brainrot))
+            {
+                System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+                System.exit(10);
+            }
         }
 
         System.out.println("How are you feeling today, " + name + "?");
@@ -176,18 +185,6 @@ public class Main
                         DiagnosisEngine results = new DiagnosisEngine(pat);
                         results.differentialDiagnosis();
 
-                        //Developer mode
-                        if (developerMode)
-                        {
-                            System.out.println ("- This segment is for developer mode -");
-                            for (Disease d : results.getDiseaseDatabase())
-                            {
-                                System.out.println(d.getDiseaseName() + ", " + d.getFit());
-                            }
-                            System.out.println("- End of developer mode -\n");
-                        }
-                        //End of developer mode
-
                         ArrayList<Disease> diagnosis = Patient.getDisease();
                         ArrayList<Disease> plausibleDiagnosis = new ArrayList<Disease>();
 
@@ -201,9 +198,17 @@ public class Main
                             }
                         }
 
-                        if (diagnosis.size() > 0)
+                        if (diagnosis.size() >= 1)
                         {
-                            System.out.println("You have been diagnosed with:");
+                            if (diagnosis.size() == 1)
+                            {
+                                System.out.println("You have been diagnosed with:");
+                            }
+                            else
+                            {
+                                System.out.println("You have been diagnosed with one or more of the following:");
+                            }
+
                             for (Disease d : diagnosis)
                             {
                                 if (developerMode)
@@ -238,9 +243,47 @@ public class Main
                         }
                         else
                         {
-                            System.out.println("I've got no clue what's wrong with you. I guess you're just a medical mystery. Enjoy your new title.\n(If you're still concerned, go find a real doctor, just in case.)\nBye bye.\n");
+                            System.out.println("Are you kidding me? I've got no clue what's wrong with you. I guess you're just a medical mystery. Enjoy your new title.\n(If you're still concerned, go find a real doctor, just in case.)\nBye bye.\n");
                         }
 
+                        //Developer mode
+                        if (developerMode)
+                        {
+                            System.out.println ("---------- This segment is for developer mode ----------\n");
+                            System.out.println("All diseases and their fit values:");
+                            for (Disease d : results.getDiseaseDatabase())
+                            {
+                                System.out.println(d.getDiseaseName() + ", " + d.getFit());
+                            }
+                            System.out.println("\nBest fit: " + results.getBestFit());
+                            System.out.print("\ndiagnosis = {");
+                            for (int i = 0; i < diagnosis.size(); i++)
+                            {
+                                if (i < diagnosis.size() - 1)
+                                {
+                                    System.out.print(diagnosis.get(i).getDiseaseName() + ", ");
+                                }
+                                else
+                                {
+                                    System.out.println(diagnosis.get(i).getDiseaseName() + "}");
+                                }
+                            }
+                            System.out.print("\nplausible diagnosis = {");
+                            for (int i = 0; i < plausibleDiagnosis.size(); i++)
+                            {
+                                if (i < plausibleDiagnosis.size() - 1)
+                                {
+                                    System.out.print(plausibleDiagnosis.get(i).getDiseaseName() + ", ");
+                                }
+                                else
+                                {
+                                    System.out.println(plausibleDiagnosis.get(i).getDiseaseName() + "}");
+                                }
+                            }
+                            System.out.println("\n---------- End of developer mode ----------\n");
+                        }
+                        //End of developer mode
+                        
                         doneThinking = true;
                     }
                 };
@@ -311,6 +354,18 @@ public class Main
         Scanner sc = new Scanner(System.in);
         String answer = sc.nextLine();
         System.out.println();
+        
+        if (doesItContain(answer.toLowerCase(), "skibidi"))
+        {
+            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
+            System.exit(10);
+        }
+        else if (answer.equals("developerMode = true"))
+        {
+            developerMode = true;
+            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
+            return booleanConverter();
+        }
 
         for (String yes : yesVariation)
         {
@@ -325,18 +380,6 @@ public class Main
             {
                 return false;
             }
-        }
-
-        if (doesItContain(answer.toLowerCase(), "skibidi"))
-        {
-            System.out.println("You have been diagnosed with brain rot. Ur not the sigma. Please go see doctor I cannot help you.\n");
-            System.exit(10);
-        }
-        else if (answer.equals("developerMode = true"))
-        {
-            developerMode = true;
-            System.out.println("Developer mode has been enabled. Please re-enter desired value:");
-            return booleanConverter();
         }
 
         System.out.println("For syntactical purposes, please enter a valid affirmative response:");
@@ -445,7 +488,7 @@ public class Main
             if (position + find.length() <= input.length() - 1)
             {
                 String after = input.substring(position + find.length());
-                if ((after.compareTo("a") > 0 && after.compareTo("z") < 0))
+                if ((after.compareTo("a") >= 0 && after.compareTo("z") <= 0))
                 {
                     return doesItContain(input.substring(position + find.length()), find);
                 }
@@ -465,7 +508,7 @@ public class Main
             {
                 String before = input.substring(position - 1, position);
                 String after = input.substring(position + find.length());
-                if ((before.compareTo("a") > 0 && before.compareTo("z") < 0) || (after.compareTo("a") > 0 && after.compareTo("z") < 0))
+                if ((before.compareTo("a") >= 0 && before.compareTo("z") <= 0) || (after.compareTo("a") >= 0 && after.compareTo("z") <= 0))
                 {
                     return doesItContain(input.substring(0, position) + input.substring(position + find.length()), find);
                 }
@@ -477,7 +520,7 @@ public class Main
             else
             {
                 String before = input.substring(position - 1, position);
-                if ((before.compareTo("a") > 0 && before.compareTo("z") < 0))
+                if ((before.compareTo("a") >= 0 && before.compareTo("z") <= 0))
                 {
                     return doesItContain(input.substring(0, position), find);
                 }
